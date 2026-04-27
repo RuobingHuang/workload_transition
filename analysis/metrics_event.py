@@ -86,6 +86,10 @@ def compute_event_metrics(perf: pd.DataFrame, event_row: pd.Series, next_transit
         "pre_sd_dev": pre_sd,
         "imm_mean_dev": float(np.nanmean(imm_dev)),
         "delta_dev": float(np.nanmean(imm_dev)) - pre_mean,
+        "rec_mean_dev": (
+            float(np.nanmean(rec["center_deviation"].to_numpy(dtype=float))) - pre_mean
+            if len(rec) else float("nan")
+        ),
         "peak_dev_0_10s": (
             float(np.nanmax(peakw["center_deviation"].to_numpy(dtype=float)))
             if len(peakw) else float("nan")

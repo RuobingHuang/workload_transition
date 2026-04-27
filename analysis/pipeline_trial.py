@@ -3,6 +3,7 @@ from .io_log import read_trial_log
 from .schedule import build_transition_events_split
 from .metrics_trial import compute_trial_metrics
 from .metrics_event import compute_event_metrics
+from .metrics_tail import compute_tail_metrics
 from .config import SCHEDULES, CONDITION_META
 from .preprocess import get_schedule_start_t0, extract_track_performance
 
@@ -40,5 +41,11 @@ def run_one_trial(log_path: str, participant_id: str, condition: str):
 
     reg_df = compute_for_events(reg_events)
     tail_df = compute_for_events(tail_events)
+
+    # TAIL 段体指标：描述整个 45 s 低负荷尾段的表现（抵抗力/恢复力后效）
+    if not tail_df.empty and not tail_events.empty:
+        tail_body = compute_tail_metrics(perf, tail_events.iloc[0], reg_df)
+        for k, v in tail_body.items():
+            tail_df[k] = v
 
     return trial_df, reg_df, tail_df

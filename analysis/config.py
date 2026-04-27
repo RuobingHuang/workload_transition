@@ -14,9 +14,9 @@ class WindowsMs:
     pre_end: int = -2_000
     imm_start: int = 0
     imm_end: int = 5_000
-    peak_end: int = 10_000#0~10s内最大偏差）
-    rec_start: int = 11_000#recovery
-    rec_end: int = 14_000
+    peak_end: int = 10_000  # 0~10s 内最大偏差（独立 max 指标）
+    rec_start: int = 5_000   # recovery 窗口起点（与 imm 紧接，不重叠）
+    rec_end: int = 10_000    # recovery 窗口终点（对齐最短 10s 段）
     sustain_ms: int = 2_000  # “恢复需要持续满足阈值”的时长
 
 WIN = WindowsMs()
