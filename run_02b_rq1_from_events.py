@@ -7,7 +7,7 @@ TRANSITION_CONDS = ["LI_LF","HI_LF","LI_MF","HI_MF","LI_HF","HI_HF"]
 # 你 event 表里应当有的列（按我们之前 pipeline 的命名）
 NEEDED = {
     "participant_id", "condition",
-    "delta_dev", "peak_dev_0_10s",
+    "delta_dev", "peak_dev_0_10s", "imm_mean_dev", "rec_mean_dev",
     "t_recover_dev_ms", "recover_success",
     "residual_dev_11_14s",
 }
@@ -40,6 +40,9 @@ def build_trial_aggregates_from_regular_events(path="event_metrics_regular.csv")
         peak_mean=("peak_dev_0_10s", "mean"),
         peak_p95=("peak_dev_0_10s", lambda x: np.nanpercentile(x, 95)),
 
+        imm_mean=("imm_mean_dev", "mean"),
+        rec_mean=("rec_mean_dev", "mean"),
+
         delta_mean=("delta_dev", "mean"),
         delta_med=("delta_dev", "median"),
 
@@ -70,8 +73,8 @@ def main():
     df.to_csv("rq1_trial_aggregates_from_events.csv", index=False)
     print("Wrote rq1_trial_aggregates_from_events.csv rows=", len(df))
 
-    # 推荐你先看这三个（最“切换敏感”）
-    for metric in ["peak_mean", "trec_med", "recover_success_rate", "delta_mean", "resid_11_14s_mean"]:
+    # 核心三指标：imm(0-5s均值), rec(5-10s均值), peak(0-10s最大值)，每个各做 2(intensity)×3(freq) RM-ANOVA
+    for metric in ["imm_mean", "rec_mean", "peak_mean", "trec_med", "recover_success_rate", "delta_mean", "resid_11_14s_mean"]:
         rm_anova(df, metric)
 
 if __name__ == "__main__":
