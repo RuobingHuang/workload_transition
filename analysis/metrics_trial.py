@@ -7,7 +7,7 @@ def auc_trapz(y: np.ndarray, t_sec: np.ndarray) -> float:
     # 用真实时间间隔做面积（更稳）
     if len(y) < 2:
         return float("nan")
-    return float(np.trapz(y, t_sec))
+    return float(np.trapezoid(y, t_sec))
 
 def compute_trial_metrics(perf_wide: pd.DataFrame) -> dict:
     """
