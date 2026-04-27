@@ -84,13 +84,13 @@ def load_tail_csv(path: str = "event_metrics_tail.csv") -> pd.DataFrame:
 def compare_base_vs_conditions(df: pd.DataFrame) -> pd.DataFrame:
     """
     对每个 TAIL 指标，分别检验 6 个过渡条件是否与 BASE 不同。
-    单侧（higher-is-worse / lower-is-worse）或双侧。
+    双侧检验（因为有的条件可能比 BASE 更好，有的可能更差，方向不确定）。
     Holm 校正在每个指标的 6 次比较内进行。
     """
     base = df[df["condition"] == "BASE"].set_index("participant_id")
     all_metrics = (
-        [(m, "greater") for m in TAIL_METRICS_HIGHER_WORSE]
-        + [(m, "less")    for m in TAIL_METRICS_LOWER_WORSE]
+        [(m, "two-sided") for m in TAIL_METRICS_HIGHER_WORSE]
+        + [(m, "two-sided") for m in TAIL_METRICS_LOWER_WORSE]
         + [(m, "two-sided") for m in TAIL_METRICS_TWO_SIDED]
     )
 
