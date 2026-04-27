@@ -19,10 +19,11 @@ def paired_tests_within_intensity(df, metric, intensity):
     # pivot: participant × freq
     piv = d.pivot_table(index="participant_id", columns="freq", values=metric, aggfunc="mean")
 
-    # ensure columns exist
+    # ensure columns exist; skip missing freq levels (e.g. HF absent for HI when HI_HF excluded)
     missing_cols = [f for f in FREQ_ORDER if f not in piv.columns]
     if missing_cols:
-        raise ValueError(f"Missing freq columns for intensity={intensity}, metric={metric}: {missing_cols}")
+        print(f"[跳过] intensity={intensity}, metric={metric}: 缺少 freq 列 {missing_cols}（条件已排除）")
+        return pd.DataFrame()
 
     pairs = list(itertools.combinations(FREQ_ORDER, 2))
     rows = []

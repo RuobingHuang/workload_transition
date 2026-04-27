@@ -26,7 +26,8 @@ from statsmodels.stats.multitest import multipletests
 from statsmodels.stats.anova import AnovaRM
 
 # ── 条件分组 ──────────────────────────────────────────────────
-TRANSITION_CONDS = ["LI_LF", "HI_LF", "LI_MF", "HI_MF", "LI_HF", "HI_HF"]
+# HI_HF 因时间未对齐已从分析中排除
+TRANSITION_CONDS = ["LI_LF", "HI_LF", "LI_MF", "HI_MF", "LI_HF"]
 
 # ── 感兴趣的指标及其方向（"higher_is_worse" → True 意味着数值越大表现越差）──
 TAIL_METRICS_HIGHER_WORSE = [

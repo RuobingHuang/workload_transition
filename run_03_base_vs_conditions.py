@@ -20,7 +20,8 @@ import pandas as pd
 from scipy.stats import ttest_rel
 from statsmodels.stats.multitest import multipletests
 
-TRANSITION_CONDS = ["LI_LF", "HI_LF", "LI_MF", "HI_MF", "LI_HF", "HI_HF"]
+# HI_HF 因时间未对齐已从分析中排除
+TRANSITION_CONDS = ["LI_LF", "HI_LF", "LI_MF", "HI_MF", "LI_HF"]
 
 TRIAL_METRICS = ["mean_dev", "std_dev", "rmse_dev", "auc_dev"]
 OPTIONAL_METRICS = ["hit_ratio"]
