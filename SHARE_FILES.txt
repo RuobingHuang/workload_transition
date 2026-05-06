@@ -1,0 +1,37 @@
+Minimum files to share with collaborators:
+
+HANDOFF.md
+RUN_ANALYSIS.md
+requirements.txt
+
+trial_metrics.csv
+event_metrics_regular.csv
+event_metrics_tail.csv
+rq1_trial_aggregates_from_events_2_3.csv
+run_02b_rq1_from_events_results2
+next_disturbance_response_fixed.csv
+next_disturbance_rmanova_fixed.csv
+next_disturbance_pairwise_fixed.csv
+
+run_02b_rq1_from_events.py
+visualize_transition_worse_than_base.py
+visualize_next_disturbance_resilience.py
+visualize_next_disturbance_u_shape.py
+diagnose_tail_45s_analysis.py
+
+figures/transition_worse_than_base.png
+figures/next_disturbance_resilience_publication.png
+figures/next_disturbance_resilience_publication.pdf
+figures/next_disturbance_u_shape.png
+figures/next_disturbance_u_shape.pdf
+figures/tail_45s_diagnostic.png
+
+Optional regeneration files:
+
+analysis/
+main.py
+run_03_base_vs_conditions.py
+run_04_tail_analysis.py
+run_06_tail_mechanism_analysis.py
+run_07_next_disturbance_resilience_fixed.py
+data/expdata/index.csv

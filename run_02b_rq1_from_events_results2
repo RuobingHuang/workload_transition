@@ -1,0 +1,32 @@
+RM-ANOVA Results（2×3: Intensity × Frequency）
+TRANSITION_CONDS = ["LI_LF","HI_LF","LI_MF","HI_MF","LI_HF","HI_HF"]
+resid=5_10s_mean
+
+Overall Summary Table==== RM-ANOVA on imm_mean ====
+| Metric               | Freq (F, p)     | Intensity (F, p) | Interaction (F, p) |
+| -------------------- | --------------- | ---------------- | ------------------ |
+| imm_mean             | 1.30, 0.2889 ❌  | 51.22, <0.001 ✅  | 2.49, 0.1012 ❌     |即时表现（imm_mean）只受强度影响，不受频率影响，也不存在交互效应。
+| rec_mean             | 12.38, 0.0001 ✅ | 2.40, 0.1434 ❌   | 0.58, 0.5655 ❌     |低强度下无频率差异 高强度下LF 显著更差，MF ≈ HF
+| peak_mean            | 2.25, 0.1243 ❌  | 53.24, <0.001 ✅  | 2.99, 0.0663 ⚠️    |
+| trec_med             | 2.13, 0.1376 ❌  | 14.34, 0.0020 ✅  | 1.42, 0.2578 ❌     |
+| recover_success_rate | 10.52, 0.0004 ✅ | 44.88, <0.001 ✅  | 0.47, 0.6325 ❌     |LI下 HF 显著更好，LF 较差 HI下LF 最差，MF ≈ HF
+| delta_mean           | 11.76, 0.0002 ✅ | 17.80, 0.0009 ✅  | 1.44, 0.2545 ❌     |
+| resid_5_10s_mean     | 12.38, 0.0001 ✅ | 2.40, 0.1434 ❌   | 0.58, 0.5655 ❌     |
+
+
+
+RM-ANOVA Results（2×2: Intensity × Frequency）
+TRANSITION_CONDS = TRANSITION_CONDS = ["LI_LF","HI_LF","LI_MF","HI_MF"]
+resid=10_15s_mean
+Overall Summary Table
+| Metric               | Freq (F, p)     | Intensity (F, p) | Interaction (F, p) |
+| -------------------- | --------------- | ---------------- | ------------------ |
+| imm_mean             | 2.07, 0.1724 ❌  | 46.26, <0.001 ✅  | 2.16, 0.1637 ❌     |
+| rec_mean             | 14.27, 0.0020 ✅ | 1.11, 0.3105 ❌   | 1.22, 0.2885 ❌     |
+| peak_mean            | 6.58, 0.0224 ✅  | 38.51, <0.001 ✅  | 4.33, 0.0562 ⚠️    |
+| trec_med             | 1.60, 0.2262 ❌  | 9.15, 0.0091 ✅   | 0.93, 0.3509 ❌     |
+| recover_success_rate | 10.59, 0.0058 ✅ | 13.02, 0.0028 ✅  | 0.25, 0.6222 ❌     |
+| delta_mean           | 13.30, 0.0026 ✅ | 11.16, 0.0048 ✅  | 2.10, 0.1692 ❌     |
+| resid_11_14s_mean    | 5.76, 0.0309 ✅  | 10.57, 0.0058 ✅  | 1.64, 0.2211 ❌     |
+The two analyses show consistent overall patterns in main effects; however, differences emerge in peak and residual\
+metrics due to changes in condition selection (removal of high-frequency trials) and residual time window definitions.

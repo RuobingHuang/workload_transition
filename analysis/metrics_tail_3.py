@@ -88,6 +88,7 @@ def compute_tail_metrics(
 
     # --- 前段（0-15 s）vs 后段（末尾 15 s）子窗口 ---
     early = _window_slice_abs(perf, t_start, t_start + 15_000)
+    middle = _window_slice_abs(perf, t_start + 15_000,t_end - 15_000)
     late_start = max(t_start + 15_000, t_end - 15_000)
     late = _window_slice_abs(perf, late_start, t_end)
 
@@ -95,12 +96,22 @@ def compute_tail_metrics(
         float(np.nanmean(early["center_deviation"].to_numpy(dtype=float)))
         if len(early) else _nan
     )
+    out["tail_mid_mean_dev"] = (
+        float(np.nanmean(middle["center_deviation"].to_numpy(dtype=float)))
+        if len(middle) else _nan
+    )
     out["tail_late_mean_dev"] = (
         float(np.nanmean(late["center_deviation"].to_numpy(dtype=float)))
         if len(late) else _nan
     )
     early_v = out["tail_early_mean_dev"]
     late_v = out["tail_late_mean_dev"]
+    mid_v = out["tail_mid_mean_dev"]
+    out["tail_delta_mid_late"] = (
+        late_v - mid_v
+        if not (np.isnan(late_v) or np.isnan(mid_v))
+        else _nan
+    )
     out["tail_delta_early_late"] = (
         late_v - early_v
         if not (np.isnan(late_v) or np.isnan(early_v))
