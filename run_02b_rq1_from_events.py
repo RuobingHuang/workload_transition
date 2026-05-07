@@ -2,7 +2,8 @@ import numpy as np
 import pandas as pd
 from statsmodels.stats.anova import AnovaRM
 
-TRANSITION_CONDS = ["LI_LF","HI_LF","LI_MF","HI_MF","LI_HF","HI_HF"]
+# HI_HF 因时间未对齐已从分析中排除
+TRANSITION_CONDS = ["LI_LF","HI_LF","LI_MF","HI_MF","LI_HF"]
 
 # 你 event 表里应当有的列（按我们之前 pipeline 的命名）
 NEEDED = {

@@ -26,7 +26,8 @@ from statsmodels.stats.multitest import multipletests
 from statsmodels.stats.anova import AnovaRM
 
 # ── 条件分组 ──────────────────────────────────────────────────
-TRANSITION_CONDS = ["LI_LF", "HI_LF", "LI_MF", "HI_MF", "LI_HF", "HI_HF"]
+# HI_HF 因时间未对齐已从分析中排除
+TRANSITION_CONDS = ["LI_LF", "HI_LF", "LI_MF", "HI_MF", "LI_HF"]
 
 # ── 感兴趣的指标及其方向（"higher_is_worse" → True 意味着数值越大表现越差）──
 TAIL_METRICS_HIGHER_WORSE = [
@@ -37,11 +38,9 @@ TAIL_METRICS_HIGHER_WORSE = [
     "tail_early_mean_dev",    # 前 15 s 均值
     "tail_late_mean_dev",     # 后 15 s 均值
     "tail_time_to_stable_ms", # 首次稳定所需时间（越长越差）
-    # delta_dev / imm_mean_dev（进入 TAIL 时的即时冲击，来自 compute_event_metrics）
-    "delta_dev",
-    "imm_mean_dev",
-    "rec_mean_dev",
-    "t_recover_dev_ms",
+    # 注：delta_dev / rec_mean_dev / t_recover_dev_ms 是相对于进入TAIL之前
+    # 高负荷段基线（pre_mean）的差值，不代表 TAIL 段本身的绝对表现水平，
+    # 不适合在此处做7条件比较，故移除。
 ]
 
 # 越大越好的指标
